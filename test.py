@@ -60,6 +60,8 @@ def predict_attentiveness(results):
     # Define thresholds for attentiveness (adjust as needed)
     head_pitch_threshold = 15  # Degrees
     eye_aspect_ratio_threshold = 0.25
+    head_pitch_angle=0
+
 
     # Calculate head pitch angle
     if pose_landmarks:
@@ -79,6 +81,7 @@ def predict_attentiveness(results):
 
     # Determine attentiveness (consider both head pose and eye aspect ratio)
     if (
+        
         head_pitch_angle < head_pitch_threshold
         and eye_aspect_ratio is not None
         and eye_aspect_ratio > eye_aspect_ratio_threshold
@@ -266,6 +269,7 @@ if __name__ == "__main__":
                          prediction_finale="Not Attentive"
                 else:
                     average_prediction = ("No predictions recorded", "No predictions recorded")
+                    prediction_finale="No prediction recorded"
                 timestamp_str = time.strftime("%H:%M", time.localtime(timestamps[-1]))
     # Save average prediction and timestamp to CSV
                 with open(csv_file_path, "a", newline="") as csvfile:
